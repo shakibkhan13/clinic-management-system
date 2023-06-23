@@ -1,5 +1,5 @@
 # clinic-management-system
-https://docs.google.com/document/d/1LqFVeI4RJdN4Fe1WhyhAOSGY7LRTY8IswRizpArKOpU/edit?usp=drivesdk
+Features Link.https://docs.google.com/document/d/1LqFVeI4RJdN4Fe1WhyhAOSGY7LRTY8IswRizpArKOpU/edit?usp=drivesdk
 
 
 ![Screenshot (155)](https://github.com/shakibkhan13/clinic-management-system/assets/134956975/4d6f9840-d067-4152-8104-453c3942bc6e)
