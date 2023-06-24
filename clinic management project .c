@@ -160,22 +160,84 @@ void Display_Surgical()
 
 void On_Add_fo()
 {
-
+    system("cls");
+    Title();
+    struct Speciality s;
+    printf("\n\t\t\t\tEnter patient searial :-  ");
+    scanf("%d",&s.serial_no);
+    printf("\n\t\t\t\tEnter patient Name :- ");
+    scanf("%s",s.name);
+    printf("\n\t\t\t\tEnter patient age :- ");
+    scanf("%d",&s.age);
+    printf("\n\t\t\t\tEnter patient Gender : ");
+    scanf("%s",s.gender);
+    printf("\n\t\t\t\tEnter patient Address :- ");
+    scanf("%s",s.address);
+    printf("\n\t\t\t\tEnter patient Contact Number :- ");
+    scanf("%s",s.contact_No);
+    total[count++] = s;
+    printf("\n\t\t\t\tAddmission from submitted successfully!\n"); \
+    getch();
 }
 
 void Display_On_Add_fo()
 {
-
+  system("cls");
+   printf("\n\t\t\t\t##################################################################");
+   printf("\n\t\t\t\t#                         PATIENT  INFORMATION                   #");
+    printf("\n\t\t\t\t##################################################################");
+    if (count == 0)
+    {
+        printf("\n\n\t\t\t\tNo specialties found.\n");
+    }
+    else
+    {
+        printf("\n\n\n\n\t\t\tID\t\tSpecialties Name\t\tAge\t\tGender\t\tAddress\t\tContact_Noumber");
+        printf("\n\n\t\t\t---------------------------------------------------------------------------------------------------------------");
+        for (int i = 0; i < count; i++)
+        {
+            printf("\n\t\t\t%d\t\t%s\t\t\t\t%d\t\t%s\t\t%s\t\t%s", total[i].serial_no, total[i].name,total[i].age,total[i].gender,total[i].address,total[i].contact_No);
+        }
+    }
+    getch();
 }
 
 void Add_medi()
 {
+    system("cls");
+    Title();
+     printf("\n\n\t\t\t*********************************************************");
+     printf("\n\t\t\t**                       Add Medicine                  **");
+     printf("\n\t\t\t*********************************************************");
+     struct Speciality s;
 
+     printf("\n\n\t\t\tEnter Medicine I'D :- ");
+     scanf("%d",&s.id);
+     printf("\n\t\t\tEnter Medicine Name :- ");
+     scanf("%s",s.name);
+      total[count++] = s;
+      printf("\n\t\t\tMedicine Added Successfully!");
+      getch();
 }
 
 void Dis_Add_medi()
 {
+    system("cls");
+    Title();
+    printf("\n\n\t\t\t********************************************************");
+    printf("\n\t\t\t**                 Display Added Medicine             **");
+    printf("\n\t\t\t********************************************************");
 
+    if(count==0){
+
+    }else{
+        printf("\n\n\t\t\tI'D\t\tMedicine Name ");
+        printf("\n\t\t\t-------------------------------------");
+        for(int i = 0 ; i < count; i++){
+            printf("\n\n\t\t\t%d\t\t%s",total[i].id,total[i].name);
+        }
+    }
+    getch();
 }
 
 void My_Heal_R()
