@@ -4,10 +4,6 @@
 #include <conio.h>
 
 #define MAX_SPECIALTIES 100
-#define MAX_PATIENTS 100
-#define MAX_MEDICINES 100
-#define MAX_EQUIPMENT 100
-
 int count = 0;
 
 struct Speciality
