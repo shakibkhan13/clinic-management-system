@@ -1,28 +1,50 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <conio.h>
 
-#define MAX_SPECIALTIES 100
-int count = 0;
+#define max_specialties 100
+#define max_patients 100
+#define max_medicines 100
+#define max_equipment 100
 
-struct Speciality
-{
-    int serial_no;
-    int doc_id;
+typedef struct {
+    int id;
+    char name[50];
+} Specialty;
+
+typedef struct {
     char name[50];
     int age;
-    char gender[20];
-    char address[70];
-    char contact_No[15];
-    char symptoms[150];
-    int pre_Admission_Status;
-    int id;
-    double price;
-    float cost;
-};
+    char gender[10];
+    char address[100];
+    char contactNumber[15];
+    char symptoms[200];
+    int preAdmissionStatus;
+} Patient;
 
-struct Speciality total[MAX_SPECIALTIES];
+typedef struct {
+    int id;
+    char name[50];
+    float price;
+} Medicine;
+
+typedef struct {
+    int id;
+    char name[50];
+    float cost;
+} Equipment;
+
+Specialty sp[max_specialties];
+int spcount = 0;
+
+Patient p[max_patients];
+int pcount = 0;
+
+Medicine m[max_medicines];
+int mcount = 0;
+
+Equipment e[max_equipment];
+int ecount = 0;
 
 void WelcomeScreen()
 {
@@ -31,7 +53,7 @@ void WelcomeScreen()
     printf("\n\t\t\t\t#   SSA CLINIC CENTER MANAGEMENT SYSTEM #");
     printf("\n\t\t\t\t#########################################");
     printf("\n\n\n\nPress any key to continue.............\n");
-    getch();
+    getchar();
     system("cls");
 }
 
@@ -41,7 +63,6 @@ void Title()
     printf("\n\t\t\t|                              SSA  CLINIC CENTER                             |");
     printf("\n\t\t\t-------------------------------------------------------------------------------");
 }
-
 void MainMenu()
 {
     system("cls");
@@ -51,13 +72,13 @@ void MainMenu()
         system("cls");
         int choose;
         Title();
-        printf("\n\n\n\n\n\t\t\t\t\t1. Add Surgical Speciality.\n");
-        printf("\n\t\t\t\t\t2. Display Surgical Speciality.\n");
+        printf("\n\n\n\t\t\t\t\t1. Add Surgical Specialty.\n");
+        printf("\n\t\t\t\t\t2. Display Surgical Specialty.\n");
         printf("\n\t\t\t\t\t3. Online Admission Form.\n");
         printf("\n\t\t\t\t\t4. Display Online Admission form.\n");
         printf("\n\t\t\t\t\t5. Add Medicine.\n");
         printf("\n\t\t\t\t\t6. Display Medicines.\n");
-        printf("\n\t\t\t\t\t7. My Health Record.\n");
+        printf("\n\t\t\t\t\t7. Patient Health Record.\n");
         printf("\n\t\t\t\t\t8. Add Equipment.\n");
         printf("\n\t\t\t\t\t9. Calculate Equipment cost.\n");
         printf("\n\t\t\t\t\t10. Contact Us.\n");
@@ -104,167 +125,210 @@ void MainMenu()
             ex_it();
             break;
         default:
-            printf("Invalid choice. Please try again.\n");
+            printf("\n\n\n\t\t\t\tInvalid Input! Please enter a valid choice from 1 to 12.");
             break;
         }
+        printf("\n\n\nPress any key to continue.............\n");
+        getchar();
+        getchar();
     } while (choice != 12);
-}
-
-void ex_it()
-{
-    system("cls");
-    Title();
-    printf("\n\n\n\n\n\n\t\t\t\t\tTHANK YOU FOR VISITING!\n");
-    getch();
 }
 
 void Add_Specialty()
 {
     system("cls");
-    printf("\n\t\t\t---------------------------------------------------------------");
-    printf("\n\t\t\t|                          Add Specialty                      |");
-    printf("\n\t\t\t---------------------------------------------------------------");
-    struct Speciality s;
-    printf("\n\n\n\t\t\t\tEnter Your Specialty ID: ");
-    scanf("%d", &s.doc_id);
-    printf("\n\t\t\t\tEnter Your Specialty name: ");
-    scanf("%s", s.name);
-    total[count++] = s;
-    printf("\n\t\t\t\tSpecialty added successfully!\n");
-    getch();
+    Title();
+    printf("\n\n\n\n\n\n\n\t\t\t\tEnter Surgical Specialty ID: ");
+    scanf("%d", &sp[spcount].id);
+    printf("\n\t\t\t\tEnter Surgical Specialty Name: ");
+    scanf("%s", sp[spcount].name);
+    spcount++;
 }
 
 void Display_Surgical()
 {
     system("cls");
     Title();
-    if (count == 0)
+    if (spcount == 0)
     {
-        printf("\n\t\t\t\tNo specialties found.\n");
+        printf("\n\n\t\t\t\tNo Surgical Specialty Added!");
     }
     else
     {
-        printf("\n\t\t\t\tID\t\tSpecialties Name");
-        printf("\n\n\t\t\t\t-------------------------------");
-        for (int i = 0; i < count; i++)
+        printf("\n\n\n\t\t\t\tSurgical Specialty List\n");
+        printf("\t\t\t\t-----------------------\n");
+        printf("\t\t\t\tID\t|\tSpecialty\n");
+        printf("\t\t\t\t-----------------------\n");
+        for (int i = 0; i < spcount; i++)
         {
-            printf("\n\t\t\t\t%d\t\t%s", total[i].doc_id, total[i].name);
+            printf("\t\t\t\t%d\t|\t%s\n", sp[i].id, sp[i].name);
         }
     }
-    getch();
 }
 
 void On_Add_fo()
 {
     system("cls");
     Title();
-    struct Speciality s;
-    printf("\n\t\t\t\tEnter patient searial :-  ");
-    scanf("%d",&s.serial_no);
-    printf("\n\t\t\t\tEnter patient Name :- ");
-    scanf("%s",s.name);
-    printf("\n\t\t\t\tEnter patient age :- ");
-    scanf("%d",&s.age);
-    printf("\n\t\t\t\tEnter patient Gender : ");
-    scanf("%s",s.gender);
-    printf("\n\t\t\t\tEnter patient Address :- ");
-    scanf("%s",s.address);
-    printf("\n\t\t\t\tEnter patient Contact Number :- ");
-    scanf("%s",s.contact_No);
-    total[count++] = s;
-    printf("\n\t\t\t\tAddmission from submitted successfully!\n"); \
-    getch();
+    printf("\n\n\n\n\n\n\n\n\t\t\t\tPatient Name: ");
+    scanf("%s", p[pcount].name);
+    printf("\n\t\t\t\tAge: ");
+    scanf("%d", &p[pcount].age);
+    printf("\n\t\t\t\tGender: ");
+    scanf("%s", p[pcount].gender);
+    printf("\n\t\t\t\tAddress: ");
+    scanf("%s", p[pcount].address);
+    printf("\n\t\t\t\tContact Number: ");
+    scanf("%s", p[pcount].contactNumber);
+    printf("\n\t\t\t\tSymptoms: ");
+    scanf("%s", p[pcount].symptoms);
+    p[pcount].preAdmissionStatus = 1;
+    pcount++;
 }
 
 void Display_On_Add_fo()
 {
-  system("cls");
-   printf("\n\t\t\t\t##################################################################");
-   printf("\n\t\t\t\t#                         PATIENT  INFORMATION                   #");
-    printf("\n\t\t\t\t##################################################################");
-    if (count == 0)
+    system("cls");
+    Title();
+    if (pcount == 0)
     {
-        printf("\n\n\t\t\t\tNo specialties found.\n");
+        printf("\n\n\t\t\t\tNo Online Admission Form Added!");
     }
     else
     {
-        printf("\n\n\n\n\t\t\tID\t\tSpecialties Name\t\tAge\t\tGender\t\tAddress\t\tContact_Noumber");
-        printf("\n\n\t\t\t---------------------------------------------------------------------------------------------------------------");
-        for (int i = 0; i < count; i++)
+        printf("\n\n\n\t\t\t\tOnline Admission Form List\n");
+        printf("\t\t\t\t-------------------------\n");
+        printf("\t\t\t\tName\t|\tAge\t|\tGender\t|\tAddress\t|\tContact Number\t|\tSymptoms\n");
+        printf("\t\t\t\t--------------------------------------------------------------------------------------------------------------------\n");
+        for (int i = 0; i < pcount; i++)
         {
-            printf("\n\t\t\t%d\t\t%s\t\t\t\t%d\t\t%s\t\t%s\t\t%s", total[i].serial_no, total[i].name,total[i].age,total[i].gender,total[i].address,total[i].contact_No);
+            printf("\t\t\t\t%s\t|\t%d\t|\t%s\t|\t%s\t|\t%s\t|\t%s\n", p[i].name, p[i].age, p[i].gender, p[i].address, p[i].contactNumber, p[i].symptoms);
         }
     }
-    getch();
 }
 
 void Add_medi()
 {
     system("cls");
     Title();
-     printf("\n\n\t\t\t*********************************************************");
-     printf("\n\t\t\t**                       Add Medicine                  **");
-     printf("\n\t\t\t*********************************************************");
-     struct Speciality s;
-
-     printf("\n\n\t\t\tEnter Medicine I'D :- ");
-     scanf("%d",&s.id);
-     printf("\n\t\t\tEnter Medicine Name :- ");
-     scanf("%s",s.name);
-      total[count++] = s;
-      printf("\n\t\t\tMedicine Added Successfully!");
-      getch();
+    printf("\n\n\n\n\n\n\n\n\t\t\t\tEnter Medicine ID: ");
+    scanf("%d", &m[mcount].id);
+    printf("\n\t\t\t\tEnter Medicine Name: ");
+    scanf("%s", m[mcount].name);
+    printf("\n\t\t\t\tEnter Medicine Price: ");
+    scanf("%f", &m[mcount].price);
+    mcount++;
 }
 
 void Dis_Add_medi()
 {
     system("cls");
     Title();
-    printf("\n\n\t\t\t********************************************************");
-    printf("\n\t\t\t**                 Display Added Medicine             **");
-    printf("\n\t\t\t********************************************************");
-
-    if(count==0){
-
-    }else{
-        printf("\n\n\t\t\tI'D\t\tMedicine Name ");
-        printf("\n\t\t\t-------------------------------------");
-        for(int i = 0 ; i < count; i++){
-            printf("\n\n\t\t\t%d\t\t%s",total[i].id,total[i].name);
+    if (mcount == 0)
+    {
+        printf("\n\n\t\t\t\tNo Medicines Added!");
+    }
+    else
+    {
+        printf("\n\n\n\t\t\t\tMedicine List\n");
+        printf("\t\t\t\t-------------\n");
+        printf("\t\t\t\tID\t|\tMedicine Name\t|\tPrice\n");
+        printf("\t\t\t\t------------------------------------\n");
+        for (int i = 0; i < mcount; i++)
+        {
+            printf("\t\t\t\t%d\t|\t%s\t|\t%.2f\n", m[i].id, m[i].name, m[i].price);
         }
     }
-    getch();
 }
 
 void My_Heal_R()
 {
-
+    system("cls");
+    Title();
+    if (pcount == 0)
+    {
+        printf("\n\n\t\t\t\tNo Health Records Found!");
+    }
+    else
+    {
+        printf("\n\n\n\t\t\t\tHealth Records List\n");
+        printf("\t\t\t\t--------------------\n");
+        printf("\t\t\t\tName\t|\tAge\t|\tGender\t|\tAddress\t|\tContact Number\t|\tSymptoms\n");
+        printf("\t\t\t\t--------------------------------------------------------------------------------------------------------------------\n");
+        for (int i = 0; i < pcount; i++)
+        {
+            printf("\t\t\t\t%s\t|\t%d\t|\t%s\t|\t%s\t|\t%s\t|\t%s\n", p[i].name, p[i].age, p[i].gender, p[i].address, p[i].contactNumber, p[i].symptoms);
+        }
+    }
 }
 
 void Add_Equip()
 {
-
+    system("cls");
+    Title();
+    printf("\n\n\n\n\n\n\n\n\t\t\t\tEnter Equipment ID: ");
+    scanf("%d", &e[ecount].id);
+    printf("\n\t\t\t\tEnter Equipment Name: ");
+    scanf("%s", e[ecount].name);
+    printf("\n\t\t\t\tEnter Equipment Cost: ");
+    scanf("%f", &e[ecount].cost);
+    ecount++;
 }
 
 void cal_Equip_cost()
 {
-
+    system("cls");
+    Title();
+    float totalCost = 0;
+    if (ecount == 0)
+    {
+        printf("\n\n\t\t\t\tNo Equipment Added!");
+    }
+    else
+    {
+        for (int i = 0; i < ecount; i++)
+        {
+            totalCost += e[i].cost;
+        }
+        printf("\n\n\t\t\t\tTotal Equipment Cost: %.2f", totalCost);
+    }
 }
 
 void cont_us()
 {
-
+    system("cls");
+    Title();
+    printf("\n\n\t\t\t\t\t\tContact Us\n");
+    printf("\t\t\t\t\t\t---------\n");
+    printf("\n\t\t\t\t\tSSA Clinic Center\n");
+    printf("\n\t\t\t\t\tAddress: pollobi , Mirpur-12 , Dhaka \n");
+    printf("\n\t\t\t\t\tContact Number: 01909125813\n");
+    printf("\n\t\t\t\t\tEmail: ssaclinicmanagement1@gmail\n");
 }
 
 void Hos_news()
 {
+    system("cls");
+    Title();
+    printf("\n\n\t\t\t\t\t   Hospital News\n");
+    printf("\t\t\t\t\t   ------------\n");
+    printf("\n\t\t\t\t\t- New surgical specialty added.\n");
+    printf("\n\t\t\t\t\t- Special discounts on medicines.\n");
+    printf("\n\t\t\t\t\t- Upgraded equipment for better patient care.\n");
+}
+
+void ex_it()
+{
+    system("cls");
+    Title();
+    printf("\n\t\t\t\tThank you for watching SSA Clinic Center Management System!\n");
+    printf("\n\t\t\t\t\t\tHave a nice day!\n");
 
 }
 
 int main()
 {
     WelcomeScreen();
-    Title();
     MainMenu();
     return 0;
 }
