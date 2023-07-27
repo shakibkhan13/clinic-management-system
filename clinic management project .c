@@ -1,3 +1,7 @@
+
+
+//Project Name clinic management system
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -143,6 +147,8 @@ void Add_Specialty()
     printf("\n\t\t\t\tEnter Surgical Specialty Name: ");
     scanf("%s", sp[spcount].name);
     spcount++;
+    printf("\n\n\n\n\t\t\t\tSurgical Specialty is Added ! ...........................");
+
 }
 
 void Display_Surgical()
@@ -155,13 +161,14 @@ void Display_Surgical()
     }
     else
     {
-        printf("\n\n\n\t\t\t\tSurgical Specialty List\n");
-        printf("\t\t\t\t-----------------------\n");
+        printf("\n\n\n\t\t\t\t---------------------------------");
+        printf("\n\t\t\t\t#    Surgical Specialty List    #\n");
+        printf("\t\t\t\t---------------------------------\n");
         printf("\t\t\t\tID\t|\tSpecialty\n");
         printf("\t\t\t\t-----------------------\n");
         for (int i = 0; i < spcount; i++)
         {
-            printf("\t\t\t\t%d\t|\t%s\n", sp[i].id, sp[i].name);
+            printf("\t\t\t\t%d\t|\t%s\n\n", sp[i].id, sp[i].name);
         }
     }
 }
@@ -170,7 +177,7 @@ void On_Add_fo()
 {
     system("cls");
     Title();
-    printf("\n\n\n\n\n\n\n\n\t\t\t\tPatient Name: ");
+    printf("\n\n\n\n\t\t\t\tPatient Name: ");
     scanf("%s", p[pcount].name);
     printf("\n\t\t\t\tAge: ");
     scanf("%d", &p[pcount].age);
@@ -184,6 +191,7 @@ void On_Add_fo()
     scanf("%s", p[pcount].symptoms);
     p[pcount].preAdmissionStatus = 1;
     pcount++;
+    printf("\n\n\t\t\t\tOnline Patient  Admission  is Added !..............................................");
 }
 
 void Display_On_Add_fo()
@@ -196,13 +204,14 @@ void Display_On_Add_fo()
     }
     else
     {
-        printf("\n\n\n\t\t\t\tOnline Admission Form List\n");
-        printf("\t\t\t\t-------------------------\n");
-        printf("\t\t\t\tName\t|\tAge\t|\tGender\t|\tAddress\t|\tContact Number\t|\tSymptoms\n");
-        printf("\t\t\t\t--------------------------------------------------------------------------------------------------------------------\n");
+        printf("\n\n\n\t\t\t\t\t\tOnline Admission Form List\n");
+        printf("\t\t\t\t\t\t----------------------------\n\n");
+        printf("\t\t\t\t|\tName\t | \tAge\t | \tGender\t | \tAddress \t | \tContact Number\t | \tSymptoms\n");
+        printf("\t\t----------------------------------------------------------------------------------------------------------------------------------\n");
         for (int i = 0; i < pcount; i++)
         {
-            printf("\t\t\t\t%s\t|\t%d\t|\t%s\t|\t%s\t|\t%s\t|\t%s\n", p[i].name, p[i].age, p[i].gender, p[i].address, p[i].contactNumber, p[i].symptoms);
+            printf("\t\tSerial No: %d",i+1);
+            printf("\t  %s \t|\t%d\t|\t%s\t|\t%s\t|\t%s\t | \t%s\n\n", p[i].name, p[i].age, p[i].gender, p[i].address, p[i].contactNumber, p[i].symptoms);
         }
     }
 }
@@ -218,6 +227,7 @@ void Add_medi()
     printf("\n\t\t\t\tEnter Medicine Price: ");
     scanf("%f", &m[mcount].price);
     mcount++;
+    printf("\n\n\n\t\t\t\tMedicine is Added!.....................................");
 }
 
 void Dis_Add_medi()
@@ -233,10 +243,11 @@ void Dis_Add_medi()
         printf("\n\n\n\t\t\t\tMedicine List\n");
         printf("\t\t\t\t-------------\n");
         printf("\t\t\t\tID\t|\tMedicine Name\t|\tPrice\n");
-        printf("\t\t\t\t------------------------------------\n");
+        printf("\t\t\t\t-----------------------------------------------\n");
         for (int i = 0; i < mcount; i++)
         {
-            printf("\t\t\t\t%d\t|\t%s\t|\t%.2f\n", m[i].id, m[i].name, m[i].price);
+
+            printf("\t\t\t\t%d\t|\t%s\t\t|\t%.2f\n", m[i].id, m[i].name, m[i].price);
         }
     }
 }
@@ -251,13 +262,14 @@ void My_Heal_R()
     }
     else
     {
-        printf("\n\n\n\t\t\t\tHealth Records List\n");
-        printf("\t\t\t\t--------------------\n");
+        printf("\n\n\n\t\t\t\t-------------------------------------------------------------");
+        printf("\n\t\t\t\t!   Patient Health Records List                             !\n");
+        printf("\t\t\t\t-------------------------------------------------------------\n");
         printf("\t\t\t\tName\t|\tAge\t|\tGender\t|\tAddress\t|\tContact Number\t|\tSymptoms\n");
-        printf("\t\t\t\t--------------------------------------------------------------------------------------------------------------------\n");
+        printf("\t\t\t\t------------------------------------------------------------------------------------------------------------------\n");
         for (int i = 0; i < pcount; i++)
         {
-            printf("\t\t\t\t%s\t|\t%d\t|\t%s\t|\t%s\t|\t%s\t|\t%s\n", p[i].name, p[i].age, p[i].gender, p[i].address, p[i].contactNumber, p[i].symptoms);
+            printf("\t\t\t\t%s\t|\t%d\t|\t%s\t|\t%s\t|\t%s\t| \t%s\n", p[i].name, p[i].age, p[i].gender, p[i].address, p[i].contactNumber, p[i].symptoms);
         }
     }
 }
@@ -273,6 +285,7 @@ void Add_Equip()
     printf("\n\t\t\t\tEnter Equipment Cost: ");
     scanf("%f", &e[ecount].cost);
     ecount++;
+    printf("\n\n\n\t\t\t\tEquipment is Added!..................................................");
 }
 
 void cal_Equip_cost()
@@ -299,11 +312,11 @@ void cont_us()
     system("cls");
     Title();
     printf("\n\n\t\t\t\t\t\tContact Us\n");
-    printf("\t\t\t\t\t\t---------\n");
+    printf("\t\t\t\t\t\t----------\n");
     printf("\n\t\t\t\t\tSSA Clinic Center\n");
     printf("\n\t\t\t\t\tAddress: pollobi , Mirpur-12 , Dhaka \n");
-    printf("\n\t\t\t\t\tContact Number: 01909125813\n");
-    printf("\n\t\t\t\t\tEmail: ssaclinicmanagement1@gmail\n");
+    printf("\n\t\t\t\t\tContact Number: 01909125813,\n");
+    printf("\n\t\t\t\t\tEmail: ssaclinicmanagement1@gmail.com\n");
 }
 
 void Hos_news()
