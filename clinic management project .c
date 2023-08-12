@@ -25,15 +25,16 @@ void dashBoard();
 //Function for addPatient
 void addPatient()
 {
-    system("cls");
     if(numberOfPatient>=MAX_PATIENTS)
     {
         printf("\nMaximum number of patient is reached!\n");
         return;
     }
     struct Patient newPatient;
-    printf("/nEnter the name of patient : ");
-    scanf("%s",&newPatient.name);
+    printf("\n\nEnter the name of patient : ");
+    getchar();
+    fgets(newPatient.name,sizeof(newPatient.name),stdin);
+    newPatient.name[strcspn(newPatient.name,"\n")]='\0';
     printf("Enter the age of patient : ");
     scanf("%d",&newPatient.age);
     printf("Enter the gender of patient : ");
@@ -45,25 +46,28 @@ void addPatient()
     printf("Enter the discharge Date : ");
     scanf("%s",&newPatient.dischargeDate);
     printf("Enter the attending doctor name : ");
-    scanf("%s",&newPatient.attendingDoctor);
+    getchar();
+    fgets(newPatient.attendingDoctor,sizeof(newPatient.attendingDoctor),stdin);
+    newPatient.attendingDoctor[strcspn(newPatient.attendingDoctor,"\n")]='\0';
     printf("Enter the disease name : ");
     scanf("%s",&newPatient.disease);
     patients[numberOfPatient]=newPatient;
     numberOfPatient++;
-    printf("New patient add successfully.\n");
+    printf("\nNew patient add successfully.\n");
 }
 //Function for delete patient
 void deletePatient()
 {
-    system("cls");
     if(numberOfPatient == 0)
     {
         printf("\nThere is no patient for delete.\n");
         return;
     }
     char deletePatient[40];
-    printf("\nEnter the name of  Patient to delete : ");
-    scanf("%s",&deletePatient);
+    printf("\n\nEnter the name of  Patient to delete : ");
+    getchar();
+    fgets(deletePatient,sizeof(deletePatient),stdin);
+    deletePatient[strcspn(deletePatient,"\n")]='\0';
     int found = 0;
     for(int i=0;i<numberOfPatient;i++)
     {
@@ -80,25 +84,26 @@ void deletePatient()
     }
     if(found == 1)
     {
-        printf("Information of patient is deleted successfully.\n");
+        printf("\nInformation of patient is deleted successfully.\n");
     }
     else
     {
-        printf("patient is not found.\n");
+        printf("\npatient is not found.\n");
     }
 }
 //Function for update patient information
 void updatePatient()
 {
-    system("cls");
     if(numberOfPatient == 0)
     {
         printf("\nThere is no patient to update his/her information.\n");
         return;
     }
     char updateToName[40];
-    printf("\nEnter the name of patient to update : ");
-    scanf("%s",&updateToName);
+    printf("\n\nEnter the name of patient to update : ");
+    getchar();
+    fgets(updateToName,sizeof(updateToName),stdin);
+    updateToName[strcspn(updateToName,"\n")]='\0';
     int found = 0;
     for(int i=0;i<numberOfPatient;i++)
     {
@@ -115,7 +120,9 @@ void updatePatient()
             printf("Enter the new discharge Date : ");
             scanf("%s",&patients[i].dischargeDate);
             printf("Enter the new attending doctor name : ");
-            scanf("%s",&patients[i].attendingDoctor);
+            getchar();
+            fgets(patients[i].attendingDoctor,sizeof(patients[i].attendingDoctor),stdin);
+    patients[i].attendingDoctor[strcspn(patients[i].attendingDoctor,"\n")]='\0';
             printf("Enter the new disease name : ");
             scanf("%s",&patients[i].disease);
             found = 1;
@@ -134,7 +141,6 @@ void updatePatient()
 //Function of read patient information
 void readPatient()
 {
-    system("cls");
     if(numberOfPatient == 0)
     {
         printf("\nThere is no patient to read information.\n");
@@ -142,7 +148,9 @@ void readPatient()
     }
     char nameToRead[40];
     printf("\nEnter the name of patient to read info : ");
-    scanf("%s",&nameToRead);
+    getchar();
+    fgets(nameToRead,sizeof(nameToRead),stdin);
+    nameToRead[strcspn(nameToRead,"\n")]='\0';
     int found = 0;
     for(int i=0;i<numberOfPatient;i++)
     {
@@ -171,7 +179,6 @@ void readPatient()
 //function to print all patient
 void printPatient()
 {
-    system("cls");
      if(numberOfPatient == 0)
     {
         printf("\nThere is no patient to print information.\n");
@@ -220,7 +227,6 @@ patient *head;
 //function for take appointment
 void patientAppointment(patient *pointer)
 {
-    system("cls");
     int serial;
     char key;
     if(token == 0)
@@ -286,7 +292,6 @@ void patientAppointment(patient *pointer)
 //function for doctor appointment list
 void displayAppointment(patient *pointer)
 {
-    system("cls");
     if(pointer == NULL)
     {
         printf("\n\nNo appointment is booked for today yet!!\n");
@@ -321,13 +326,19 @@ struct admissionForm
 };
 struct admissionForm pForm[MAX_PATIENTS];
 int numberOfForm = 0;
-
+void createAdmissionForm();
+void deleteAdmissionForm();
+void updateAdmissionForm();
+void readAdmissionForm();
+void demoAdmissionForm();
+void printAdmissionForm();
+//function to create online form
 void createAdmissionForm()
 {
-    system("cls");
     if(numberOfForm>=MAX_PATIENTS)
     {
         printf("Error !Maximum number of online Admission form is reached.\n");
+        return;
     }
     struct admissionForm newpatient;
     printf("Enter the patient name : ");
@@ -354,10 +365,10 @@ void createAdmissionForm()
 //function for delete online admission form
 void deleteAdmissionForm()
 {
-    system("cls");
     if(numberOfForm == 0)
     {
         printf("Sorry! There is no Admission Form to delete.\n");
+        return;
     }
     int found = 0;
     char deletePatient[40];
@@ -389,14 +400,14 @@ void deleteAdmissionForm()
 //function to update Admission forn
 void updateAdmissionForm()
 {
-    system("cls");
     if(numberOfForm==0)
     {
         printf("\nSorry ! No Admission Form to Update.\n");
+        return;
     }
     int found =0;
     char updatePatient[40];
-    printf("Enter the patient name to update his/her Admission form : ");
+    printf("\n\nEnter the patient name to update his/her Admission form : ");
     scanf("%s",&updatePatient);
     for(int i=0;i<numberOfForm;i++)
     {
@@ -431,10 +442,10 @@ break;
 //function to read admission form
 void readAdmissionForm()
 {
-    system("cls");
     if(numberOfForm==0)
     {
         printf("sorry !There is no Admission form of any patient.\n ");
+        return;
     }
     int found = 0;
     char readPatient[40];
@@ -469,16 +480,16 @@ void readAdmissionForm()
 //function to print all admission form
 void printAdmissionForm()
 {
-    system("cls");
     if(numberOfForm==0)
     {
         printf("sorry !There is no Admission form to print.\n ");
+        return;
     }
     else{
     printf("\n\t\t\tADMISSION FORM\n");
     for(int i=0;i<numberOfForm;i++)
     {
-            printf("%d.patient name : %s\n",i+1,pForm[i].name);
+ printf("%d.patient name : %s\n",i+1,pForm[i].name);
             printf("Gender : %s\n",pForm[i].gender);
             printf("Date Of Birth : %s\n",pForm[i].dateOfBirth);
             printf("Phone Number : %s\n",pForm[i].phoneNumber);
@@ -493,7 +504,6 @@ void printAdmissionForm()
 //function for demo of admission form
 void demoAdmissionForm()
 {
-    system("cls");
     printf("\n\t\t\tADMISSION FORM\n\n");
     printf("Patient name : Akbar\n");
     printf("Gender : Male\n");
@@ -521,7 +531,6 @@ int numberOfPayment = 0;
 //function for payment
 void payment()
 {
-    system("cls");
     struct payment newpayment;
     int choice;
     if(numberOfPayment>=MAX_PATIENTS)
@@ -538,7 +547,6 @@ void payment()
     printf("3.payment through Bkash.\n");
     printf("\nEnter your choice : ");
     scanf("%d",&choice);
-    system("cls");
     switch(choice)
     {
     case 1:
@@ -569,7 +577,6 @@ void payment()
         }
     default:
         printf("\n\nInvalid choice.\n");
-        break;
     }
     printf("Enter payment date :");
     scanf("%s",&newpayment.date);
@@ -588,10 +595,10 @@ int calculateDue(int total,int deposite)
 //function for money recript
 void takeReceipt()
 {
-    system("cls");
     if(numberOfPayment==0)
     {
         printf("\nSorry! No one had not payed yet.\n");
+        return;
     }
     else
     {
@@ -637,10 +644,10 @@ void takeReceipt()
 //print all payment
 void showPayment()
 {
-    system("cls");
      if(numberOfPayment==0)
     {
         printf("\nSorry! No one had not payed yet.\n");
+        return;
     }
     else{
     printf("\n\t\t\tPAYMENT LIST:\n");
@@ -668,7 +675,6 @@ void showPayment()
 //function for demopayment
 void demoPayment()
 {
-    system("cls");
     printf("\n\nPatient name : Amina\n");
     printf("Total Amount : 1000 TK\n");
     printf("Account Number:A/C1200987\n");
@@ -677,95 +683,346 @@ void demoPayment()
     printf("Date of Payment : 12/08/2023\n");
     printf("Payment Time : 12:30 PM\n\n");
 }
-void cont_us()
+//structure for contact us
+struct contact
 {
-    system("cls");
-    printf("\nContact Us:\n");
-    printf("Address: Kawlar Bazar,Airport, Dhaka \n");
-    printf("Contact Number: 01XXXXXXXXXX\n");
-    printf("Email: ssaclinicmanagement1@gmail.com\n");
-}
-void About_us(){
-    //system("cls"); // Clear the screen
-    printf("ABOUT US\n");
-    printf("\nWelcome to our Clinic Management System!\n");
-    printf("Our clinic aims to provide high-quality healthcare services to patients.\n");
-    printf("We are dedicated to ensuring the well-being of our patients and delivering\n");
-    printf("compassionate care with the utmost professionalism.\n\n");
-    printf("For any inquiries or assistance, please contact:\n");
-    printf("Email: clinic@example.com\n");
-    printf("Phone: 123-456-7890\n\n");
-    printf("Press any key to return to the main menu...");
-    getchar(); // Wait for user input
-}
-void newsRoom() {
-   // system("cls"); // Clear the screen
-    printf("\n\n\t\t\t*////*NEWS ROOM*///*\n");
-    printf("\nWelcome to the News Room!\n");
-    printf("Stay updated with the latest news and announcements from our clinic.\n");
-    printf("1. COVID-19 Vaccination Drive: Join us for our upcoming COVID-19 vaccination drive!\n");
-    printf("   Date: August 15, 2023\n");
-    printf("   Time: 9:00 AM - 5:00 PM\n\n");
-    printf("2. New Specialist Doctor: We are excited to welcome Dr. Smith, a specialist in\n");
-    printf("   cardiology, to our clinic's team.\n\n");
-    printf("Press any key to return to the main menu...");
+    char hospitalName[40];
+    char address[50];
+    char postalAddress[50];
+    char phoneNumber[20];
+    char fax[30];
+    char email[50];
+};
+struct contact contacts[1];
+int numberOfContact=0;
+//function for create contact
+void createContact()
+{
+    if(numberOfContact>=1)
+    {
+        printf("\nSorrry !Maximum number of contact is reached.\n");
+        return;
+    }
+    else{
+    struct contact newContact;
+    printf("\nEnter Hospital name : ");
     getchar();
+    fgets(newContact.hospitalName,sizeof(newContact.hospitalName),stdin);
+    newContact.hospitalName[strcspn(newContact.hospitalName,"\n")]='\0';
+    printf("Enter Address : ");
+    fgets(newContact.address,sizeof(newContact.address),stdin);
+    newContact.address[strcspn(newContact.address,"\n")]='\0';
+    printf("Enter postal Address : ");
+    fgets(newContact.postalAddress,sizeof(newContact.postalAddress),stdin);
+    newContact.postalAddress[strcspn(newContact.postalAddress,"\n")]='\0';
+    printf("Enter phone number : ");
+    scanf("%s",&newContact.phoneNumber);
+    printf("Enter fax number:");
+    scanf("%s",&newContact.fax);
+    printf("Enter Email address :");
+    scanf("%s",&newContact.email);
+    contacts[numberOfContact]=newContact;
+    numberOfContact++;
+    printf("\nContact information is created successfully.\n");
+    }
+}
+//function for delete contact
+void deleteContact()
+{
+    int found=0;
+    if(numberOfContact==0)
+    {
+        printf("\nSorry ! There is no contact information is available for delete.\n");
+        return;
+    }
+    int index;
+    printf("Enter index number to delete contact information (%d) : ",numberOfContact-1);
+    scanf("%d",&index);
+    if(index>=0 && index<numberOfContact)
+    {
+        for(int i=index;i<numberOfContact-1;i++)
+        {
+            contacts[i]=contacts[i+1];
+        }
+        numberOfContact--;
+        found=1;
+    }
+    if(found==1)
+    {
+            printf("\nContact information is delete successfully.\n");
+
+    }
+    else
+    {
+        printf("\nNot found such contact information.\n");
+    }
+}
+//function for read contact
+void readContact()
+{
+    if(numberOfContact==0)
+    {
+        printf("\nThere is no contact to read.\n");
+        return;
+    }
+    for(int i=0;i<numberOfContact;i++)
+    {
+        printf("\n\nSTREET ADDRESS\n\n");
+        printf("%s\n",contacts[i].hospitalName);
+        printf("Address :%s\n",contacts[i].address);
+        printf("\nPOSTAL ADDRESS\n\n");
+        printf("postal address : %s\n",contacts[i].postalAddress);
+        printf("Phone Number :%s\n",contacts[i].phoneNumber);
+        printf("Fax :%s\n",contacts[i].fax);
+        printf("Email : %s\n",contacts[i].email);
+
+    }
+}
+//function of demo contact
+void demoContact()
+{
+    printf("\n\nSTREET ADDRESS\n\n");
+    printf("Sydney and Sydney Eye Hospital.\n");
+    printf("Address : 8 Macquaries st sydney,NSW 2000\n");
+    printf("\n\nPOSTAL ADDRESS\n\n");
+    printf("Postal address : GPO Box 1614\nSydney,NSW 2001\n");
+    printf("Phone number :(02)93782 711\n");
+    printf("Fax:(02)99382 7111\n");
+    printf("Email:ssehehospitalservice@health.nsw.gov.au\n");
+}
+//structure for about us
+struct aboutUs
+{
+    char hospitalName[50];
+    char history[500];
+    char community[500];
+    char achievement[500];
+};
+struct aboutUs abouts[1];
+int numberOfAboutUs=0;
+//function of create adout us
+void createAboutUs()
+{
+    if(numberOfAboutUs>=1)
+    {
+        printf("\nSorry!Maximum number of About us reached.\n");
+
+    }
+    else{
+        struct aboutUs newAbout;
+        printf("\nEnter hospital name : ");
+        getchar();
+        fgets(newAbout.hospitalName,sizeof(newAbout.hospitalName),stdin);
+        newAbout.hospitalName[strcspn(newAbout.hospitalName,"\n")]='\0' ;
+        printf("\nEnter information about hospital history : \n");
+        fgets(newAbout.history,sizeof(newAbout.history),stdin);
+        newAbout.history[strcspn(newAbout.history,"\n")]='\0' ;
+        printf("\nEnter information about hospital community :\n");
+        fgets(newAbout.community,sizeof(newAbout.community),stdin);
+        newAbout.community[strcspn(newAbout.community,"\n")]='\0' ;
+        printf("\nEnter information about hospital achievement :\n");
+        fgets(newAbout.achievement,sizeof(newAbout.achievement),stdin);
+        newAbout.achievement[strcspn(newAbout.achievement,"\n")]='\0' ;
+        abouts[numberOfAboutUs]=newAbout;
+        numberOfAboutUs++;
+        printf("\nCreate about us successfully.\n");
+    }
+}
+//function of delete about us
+void deleteAboutUs()
+{
+    if(numberOfAboutUs==0)
+    {
+        printf("\n There is no information to delete.\n");
+        return;
+    }
+    int index;
+    int found=0;
+    printf("Enter index %d ot delete information about us:",numberOfAboutUs-1);
+    scanf("%d",&index);
+    if(index>=0 && index<numberOfAboutUs)
+    {
+        for(int i=index;i<numberOfAboutUs-1;i++)
+        {
+            abouts[i]=abouts[i+1];
+        }
+        numberOfAboutUs--;
+        found=1;
+    }
+    if(found==1)
+    {
+        printf("\nInformation delete about us successfully.\n");
+    }
+    else{
+        printf("\nNot found such information.Invalid choice.\n");
+    }
+}
+//function to read about us
+void aboutUs()
+{
+    if(numberOfAboutUs==0)
+    {
+        printf("\nThere is no information About Us to read.\n");
+        return;
+    }
+    for(int i=0;i<numberOfAboutUs;i++){
+    printf("\n\n\t\t%s\n\n",abouts[i].hospitalName);
+    printf("OUR HISTORY :\n%s\n\n",abouts[i].history);
+    printf("OUR COMMUNITY :\n%s\n\n",abouts[i].community);
+    printf("OUR ACHIEVEMENT :\n%s\n\n",abouts[i].achievement);
+    }
+}
+//function for demo about us
+void demoAboutUs()
+{
+    printf("\n\n\t\t Sydney and Sydney Eye Hospital\n");
+    printf("\nOUR HISTORY :\n\n");
+    printf("Sydney and Sydney eye Hospital is steeped in history,\n");
+    printf("with a legacy of nursing and medical first to it .......\n");
+    printf("\nOUR COMMUNITY :\n\n");
+    printf("Annually there are more than 37000 attendances to\nto the hospital emergency department ....");
+    printf("\n\nOUR ACHIEVEMENT :\n\n");
+    printf("1.Surgery recovery plan success\n2.Saving of SESLHD\n3.Cost Efficient rostering....\n");
+}
+#define MAX_NEWS 100
+struct news
+{
+    char title[50];
+    char detail[300];
+};
+struct news newsroom[MAX_NEWS];
+int numberOfNews=0;
+void createNews()
+{
+    if(numberOfNews>=MAX_NEWS)
+    {
+        printf("\nSorry !News room is reached its maximum limit.\n");
+        return;
+    }
+    struct news newNews;
+    printf("\nEnter the title : ");
+    getchar();
+    fgets(newNews.title,sizeof(newNews.title),stdin);
+    newNews.title[strcspn(newNews.title,"\n")]='\0';
+    printf("\nDetails : \n");
+    fgets(newNews.detail,sizeof(newNews.detail),stdin);
+    newNews.detail[strcspn(newNews.detail,"\n")]='\0';
+    newsroom[numberOfNews]=newNews;
+    numberOfNews++;
+    printf("\nNewsroom is created successfully.\n");
+
+}
+void deleteNews()
+{
+    if(numberOfNews==0)
+    {
+        printf("\nThere is no News to delete.\n");
+        return;
+    }
+    char deleteTitle[50];
+    int found=0;
+    printf("Enter the title to delete news : ");
+    getchar();
+    fgets(deleteTitle,sizeof(deleteTitle),stdin);
+    deleteTitle[strcspn(deleteTitle,"\n")]='\0';
+    for(int i=0;i<numberOfNews;i++)
+    {
+        if(strcmp(deleteTitle,newsroom[i].title)==0)
+        {
+            for(int j=i;j<numberOfNews-1;j++)
+            {
+                newsroom[j]=newsroom[j+1];
+            }
+            numberOfNews--;
+            found=1;
+            break;
+        }
+    }
+    if(found==1)
+    {
+        printf("News is deleted successfully.\n");
+    }
+    else
+    {
+        printf("Not found.\n");
+    }
+}
+void newsRoom()
+{
+    if(numberOfNews==0)
+    {
+        printf("\nThere is no News to read.\n");
+        return;
+    }
+    printf("\n\n\t\tWELCOME TO NEWSROOM\n\n");
+    for(int i=0;i<numberOfNews;i++)
+    {
+        printf("%d.News Title :%s\n",i+1,newsroom[i].title);
+        printf("DETAILS : \n%s\n",newsroom[i].detail);
+
+    }
+}
+void demoNewsRoom()
+{
+    printf("\n\n\t\tWELCOME TO NEWS ROOM\n\n");
+    printf("Dengue Fever News : \n");
+    printf("Details:\nFor dengue patients Emergency Department are open 24/7.\n");
+    printf("the symptoms of severa dengue are\n1.belly pain...\n");
 }
 
 int main()
 {
     dashBoard();
     head=NULL;
-    int choice1,choice2,choice3,choice4,choice5,choice6;
+    int choice1,choice2,choice3,choice4,choice5,choice6,choice7,choice8;
     do{
-            printf("\n\n\nThe survice we provided are :\n");
+        printf("\n\n\nThe survice we provided are :\n");
         printf("\n1.Patient Information.\n");
         printf("2.Appointment.\n");
         printf("3.Online Admission Form.\n");
         printf("4.Make a Payment.\n");
-        printf("5.About Us.\n");
-        printf("6.Contact Us.\n");
+        printf("5.Contact Us.\n");
+        printf("6.About Us.\n");
         printf("7.News Room.\n");
         printf("9.Exit.\n\n");
         printf("Enter your choice : ");
         scanf("%d",&choice1);
-        system("cls");
         switch(choice1){
         case 1:
 
             do{
-                    printf("\n11.Add patient information.\n");
-            printf("12.Delete patient information.\n");
-            printf("13.Update patient information.\n");
-            printf("14.Read patient information.\n");
-            printf("15.Print patient information.\n");
-            printf("16.Go to main manu.\n");
+            printf("\n1.Add patient information.\n");
+            printf("2.Delete patient information.\n");
+            printf("3.Update patient information.\n");
+            printf("4.Read patient information.\n");
+            printf("5.Print patient information.\n");
+            printf("6.Go to main manu.\n");
             printf("Enter your choice : ");
             scanf("%d",&choice2);
         switch(choice2){
-        case 11:
+        case 1:
             addPatient();
             break;
-        case 12:
+        case 2:
             deletePatient();
             break;
-        case 13:
+        case 3:
             updatePatient();
             break;
-        case 14:
+        case 4:
             readPatient();
             break;
-        case 15:
+        case 5:
             printPatient();
             break;
-        case 16:
+        case 6:
             break;
         default:
             printf("\nInvalid choice for patient operation.\n");
             break;
         }
 
-    }while(choice2 != 16);
+    }while(choice2 != 6);
             break;
         case 2:
             do
@@ -862,14 +1119,99 @@ int main()
             }while(choice5 != 5);
             break;
                case 5:
-                     About_us();
+                    do
+                    {
+                        printf("\n1.Contact Us.\n");
+                        printf("2.Create contact Information.\n");
+                        printf("3.delete contact Information.\n");
+                        printf("4.demo contact us.\n");
+                        printf("5.go to main menu.\n\n");
+                        printf("Enter your choice : ");
+                        scanf("%d",&choice6);
+                        switch(choice6)
+                        {
+                        case 1:
+                            readContact();
+                            break;
+                        case 2:
+                            createContact();
+                            break;
+                        case 3:
+                            deleteContact();
+                            break;
+                        case 4:
+                            demoContact();
+                            break;
+                        case 5:
+                            break;
+                        default:
+                            printf("\nInvalid choice .\n");
+
+                        }
+                    }while(choice6 != 5);
                     break;
-               case 6:
-                     cont_us();
-                     break;
-               case 7:
+            case 6:
+                do
+                {
+                    printf("\n1.About US.\n");
+                    printf("2.create About us.\n");
+                    printf("3.delete About Us.\n");
+                    printf("4.demo About Us.\n");
+                    printf("5.go to main menu.\n\n");
+                    printf("Enter your choice : ");
+                    scanf("%d",&choice7);
+                    switch(choice7)
+                    {
+                        case 1:
+                            aboutUs();
+                            break;
+                        case 2:
+                            createAboutUs();
+                            break;
+                        case 3:
+                            deleteAboutUs();
+                            break;
+                        case 4:
+                            demoAboutUs();
+                            break;
+                        case 5:
+                            break;
+                        default:
+                            printf("\nInvalid choice.\n");
+                    }
+                            }while(choice7 != 5);
+                            break;
+            case 7:
+                do
+                {
+                   printf("\n1.News room.\n");
+                    printf("2.create News.\n");
+                   printf("3.delete News.\n");
+                   printf("4.demo News room.\n");
+                   printf("5.go to main menu.\n\n");
+                   printf("Enter your choice : ");
+                   scanf("%d",&choice8);
+                   switch(choice8)
+                   {
+                   case 1:
                     newsRoom();
-                    break  ;
+                    break;
+                   case 2:
+                    createNews();
+                    break;
+                   case 3:
+                    deleteNews();
+                    break;
+                   case 4:
+                    demoNewsRoom();
+                    break;
+                   case 5:
+                    break;
+                   default:
+                    printf("\nInvalid choice.\n");
+                   }
+                   }while(choice8 != 5);
+                 break;
 case 9:
     return 0;
 default:
