@@ -16,37 +16,48 @@ struct Patient
 };
 struct Patient patients[MAX_PATIENTS];
 int numberOfPatient=0;
-
 void addPatient()
 {
-    if(numberOfPatient>=MAX_PATIENTS)
+    if(numberOfPatient >= MAX_PATIENTS)
     {
-        printf("\nMaximum number of patient is reached!\n");
+        printf("\nMaximum number of patients is reached!\n");
         return;
     }
+
     struct Patient newPatient;
     printf("\n\nEnter the name of patient : ");
-    fgets(newPatient.name,sizeof(newPatient.name),stdin);
-    newPatient.name[strcspn(newPatient.name,"\n")]='\0';
+    scanf("%99s", newPatient.name); 
+
     printf("Enter the age of patient : ");
-    scanf("%d",&newPatient.age);
+    scanf("%d", &newPatient.age);
+
     printf("Enter the gender of patient : ");
-    scanf("%s",&newPatient.gender);
+    scanf("%9s", newPatient.gender);
+
     printf("Enter the phone number : ");
-    scanf("%s",&newPatient.phoneNumber);
-    printf("Enter the admition Date : ");
-    scanf("%s",&newPatient.admiteDate);
+    scanf("%19s", newPatient.phoneNumber);
+
+    printf("Enter the admission Date : ");
+    scanf("%19s", newPatient.admiteDate);
+
     printf("Enter the discharge Date : ");
-    scanf("%s",&newPatient.dischargeDate);
+    scanf("%19s", newPatient.dischargeDate);
+
     printf("Enter the attending doctor name : ");
-   fgets(newPatient.attendingDoctor,sizeof(newPatient.attendingDoctor),stdin);
-   newPatient.attendingDoctor[strcspn(newPatient.attendingDoctor,"\n")]='\0';
+    getchar(); 
+    fgets(newPatient.attendingDoctor, sizeof(newPatient.attendingDoctor), stdin);
+    newPatient.attendingDoctor[strcspn(newPatient.attendingDoctor, "\n")] = '\0';
+
     printf("Enter the disease name : ");
-    scanf("%s",&newPatient.disease);
-    patients[numberOfPatient]=newPatient;
+    scanf("%99s", newPatient.disease);
+
+    patients[numberOfPatient] = newPatient;
     numberOfPatient++;
-    printf("\nNew patient add successfully.\n");
+
+    printf("\nNew patient added successfully.\n");
 }
+
+
 //Function for delete patient
 void deletePatient()
 {
@@ -906,6 +917,7 @@ void deleteNews()
     }
     char deleteTitle[50];
     int found=0;
+
     printf("Enter the title to delete news : ");
     getchar();
     fgets(deleteTitle,sizeof(deleteTitle),stdin);
