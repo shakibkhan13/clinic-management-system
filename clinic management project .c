@@ -26,7 +26,7 @@ void addPatient()
 
     struct Patient newPatient;
     printf("\n\nEnter the name of patient : ");
-    scanf("%99s", newPatient.name); 
+    scanf("%99s", newPatient.name); // Using %99s to avoid buffer overflow
 
     printf("Enter the age of patient : ");
     scanf("%d", &newPatient.age);
@@ -44,7 +44,7 @@ void addPatient()
     scanf("%19s", newPatient.dischargeDate);
 
     printf("Enter the attending doctor name : ");
-    getchar(); 
+    getchar();
     fgets(newPatient.attendingDoctor, sizeof(newPatient.attendingDoctor), stdin);
     newPatient.attendingDoctor[strcspn(newPatient.attendingDoctor, "\n")] = '\0';
 
