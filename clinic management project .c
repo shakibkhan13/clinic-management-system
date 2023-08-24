@@ -1,8 +1,11 @@
+
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
 #include<conio.h>
 #define MAX_PATIENTS 100
+
+//how to create multple instance by struct
 struct Patient
 {
     char name[40];
@@ -16,48 +19,44 @@ struct Patient
 };
 struct Patient patients[MAX_PATIENTS];
 int numberOfPatient=0;
+void addPatient();
+void readPatient();
+void updatePatient();
+void deletePatient();
+void printPatient();
+void dashBoard();
+//Function for addPatient
 void addPatient()
 {
-    if(numberOfPatient >= MAX_PATIENTS)
-    {
-        printf("\nMaximum number of patients is reached!\n");
+    if(numberOfPatient>=MAX_PATIENTS)
+    {        printf("\nMaximum number of patient is reached!\n");
         return;
     }
-
     struct Patient newPatient;
     printf("\n\nEnter the name of patient : ");
-    scanf("%99s", newPatient.name); // Using %99s to avoid buffer overflow
-
+    getchar();
+    fgets(newPatient.name,sizeof(newPatient.name),stdin);
+    newPatient.name[strcspn(newPatient.name,"\n")]='\0';
     printf("Enter the age of patient : ");
-    scanf("%d", &newPatient.age);
-
+    scanf("%d",&newPatient.age);
     printf("Enter the gender of patient : ");
-    scanf("%9s", newPatient.gender);
-
+    scanf("%s",&newPatient.gender);
     printf("Enter the phone number : ");
-    scanf("%19s", newPatient.phoneNumber);
-
-    printf("Enter the admission Date : ");
-    scanf("%19s", newPatient.admiteDate);
-
+    scanf("%s",&newPatient.phoneNumber);
+    printf("Enter the admition Date : ");
+    scanf("%s",&newPatient.admiteDate);
     printf("Enter the discharge Date : ");
-    scanf("%19s", newPatient.dischargeDate);
-
+    scanf("%s",&newPatient.dischargeDate);
     printf("Enter the attending doctor name : ");
     getchar();
-    fgets(newPatient.attendingDoctor, sizeof(newPatient.attendingDoctor), stdin);
-    newPatient.attendingDoctor[strcspn(newPatient.attendingDoctor, "\n")] = '\0';
-
+    fgets(newPatient.attendingDoctor,sizeof(newPatient.attendingDoctor),stdin);
+    newPatient.attendingDoctor[strcspn(newPatient.attendingDoctor,"\n")]='\0';
     printf("Enter the disease name : ");
-    scanf("%99s", newPatient.disease);
-
-    patients[numberOfPatient] = newPatient;
+    scanf("%s",&newPatient.disease);
+    patients[numberOfPatient]=newPatient;
     numberOfPatient++;
-
-    printf("\nNew patient added successfully.\n");
+    printf("\nNew patient add successfully.\n");
 }
-
-
 //Function for delete patient
 void deletePatient()
 {
@@ -68,6 +67,7 @@ void deletePatient()
     }
     char deletePatient[40];
     printf("\n\nEnter the name of  Patient to delete : ");
+    getchar();
     fgets(deletePatient,sizeof(deletePatient),stdin);
     deletePatient[strcspn(deletePatient,"\n")]='\0';
     int found = 0;
@@ -103,6 +103,7 @@ void updatePatient()
     }
     char updateToName[40];
     printf("\n\nEnter the name of patient to update : ");
+    getchar();
     fgets(updateToName,sizeof(updateToName),stdin);
     updateToName[strcspn(updateToName,"\n")]='\0';
     int found = 0;
@@ -121,8 +122,9 @@ void updatePatient()
             printf("Enter the new discharge Date : ");
             scanf("%s",&patients[i].dischargeDate);
             printf("Enter the new attending doctor name : ");
+            getchar();
             fgets(patients[i].attendingDoctor,sizeof(patients[i].attendingDoctor),stdin);
-            patients[i].attendingDoctor[strcspn(patients[i].attendingDoctor,"\n")]='\0';
+    patients[i].attendingDoctor[strcspn(patients[i].attendingDoctor,"\n")]='\0';
             printf("Enter the new disease name : ");
             scanf("%s",&patients[i].disease);
             found = 1;
@@ -148,6 +150,7 @@ void readPatient()
     }
     char nameToRead[40];
     printf("\nEnter the name of patient to read info : ");
+    getchar();
     fgets(nameToRead,sizeof(nameToRead),stdin);
     nameToRead[strcspn(nameToRead,"\n")]='\0';
     int found = 0;
@@ -194,6 +197,8 @@ void printPatient()
         printf(" Gender : %s\n",patients[i].gender);
         printf(" Attending Doctor : %s\n",patients[i].attendingDoctor);
         printf(" Disease : %s\n",patients[i].disease);
+
+
         }
     }
 //DashBoard of the program
@@ -339,6 +344,7 @@ void createAdmissionForm()
     }
     struct admissionForm newpatient;
     printf("Enter the patient name : ");
+    getchar();
     gets(newpatient.name);
     printf("Enter Gender : ");
     scanf("%s",&newpatient.gender);
@@ -409,7 +415,7 @@ void updateAdmissionForm()
     {
         if(strcmp(updatePatient,pForm[i].name)==0)
         {
-    printf("Enter new Gender : ");
+            printf("Enter new Gender : ");
     scanf("%s",&pForm[i].gender);
     printf("Enter new Date Of Birth : ");
     scanf("%s",&pForm[i].dateOfBirth);
@@ -742,8 +748,7 @@ void deleteContact()
         }
         numberOfContact--;
         found=1;
-    }
-    if(found==1)
+    }    if(found==1)
     {
             printf("\nContact information is delete successfully.\n");
 
@@ -917,7 +922,6 @@ void deleteNews()
     }
     char deleteTitle[50];
     int found=0;
-
     printf("Enter the title to delete news : ");
     getchar();
     fgets(deleteTitle,sizeof(deleteTitle),stdin);
