@@ -6,8 +6,28 @@
 ![Screenshot (260)](https://github.com/shakibkhan13/clinic-management-system/assets/134956975/bf3df4fd-3f3b-4d8c-a664-cf4c956dace7)
 
 
+          Clinic Management System
 
 
+Features:
 
-
-Features Link.https://docs.google.com/document/d/1LqFVeI4RJdN4Fe1WhyhAOSGY7LRTY8IswRizpArKOpU/edit?usp=drivesdk
+1.Surgical Specialities
+2.Elective Surgery and Admission
+3.Getting Ready For Surgery
+4.Pre Admission
+5.Online Admission Form
+6.My Health Record
+7.While You Are Here
+8.Visiting Hours
+9.Your Healthcare Rights
+10.Medicines
+11.Make A Payment
+12.Nursing Care
+13.Equipment Costs
+14.About to stay
+15.Donations And Fundraising
+16.Volunteering
+17.Hospitals News
+18.Contact Us
+19.Our performance
+20.Patient Overviews
